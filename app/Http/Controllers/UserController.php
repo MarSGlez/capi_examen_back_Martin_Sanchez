@@ -16,6 +16,9 @@ class UserController extends Controller
     {
         
         $users = User::with('domicilio')->get();
+        foreach ($users as $data) {
+            $data->edad = \Carbon\Carbon::parse($data->fecha_nacimiento)->age;
+        }
 
         return response()->json($users, 200);
        
