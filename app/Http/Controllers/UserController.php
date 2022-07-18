@@ -14,11 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        header('Access-Control-Allow-Origin: *');
         $users = User::with('domicilio')->get();
         foreach ($users as $data) {
             $data->edad = \Carbon\Carbon::parse($data->fecha_nacimiento)->age;
         }
+        
 
         return response()->json($users, 200);
        
